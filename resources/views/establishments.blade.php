@@ -37,8 +37,15 @@
     </div>
 
         <!-- Current Establishments -->
+    <div class="panel panel-default">
+        @error('name')
+        <div class="alert alert-danger">Invalid name</div>
+        @enderror
+        @error('description')
+        <div class="alert alert-danger">Invalid description</div>
+        @enderror
     @if (count($establishments) > 0)
-        <div class="panel panel-default">
+        
             <div class="panel-heading">
                 Current Establishments
             </div>
@@ -78,6 +85,11 @@
                     </tbody>
                 </table>
             </div>
+        
+    @else
+        <div class="panel-heading">
+                No Establishments Yet
         </div>
     @endif
+    </div>
 @endsection

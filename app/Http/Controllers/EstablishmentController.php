@@ -6,6 +6,10 @@ use App\User;
 use App\Establishment;
 use App\Http\Controllers\Controller;
 
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 class EstablishmentController extends Controller
 {
     /**
@@ -34,11 +38,24 @@ class EstablishmentController extends Controller
      * Create a new establishment
      *  @return Response
      */
-    public function create() {
-        // we'll get a package of data
+    public function create(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'description' => 'required|max:255'
+        ]);
 
-        // try to add it
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors($validator);
+        }
 
-        // success or failure.
+    // Create The Establishment
+        $establishment = new Establishment;
+        $establishment->name = $request->name;
+        $establishment->description = $request->description;
+        $establishment->save();
+        return redirect()->back();
     }
 }
