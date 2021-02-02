@@ -7,8 +7,10 @@ use App\Establishment;
 use App\Http\Controllers\Controller;
 
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 
 class EstablishmentController extends Controller
 {
@@ -16,7 +18,7 @@ class EstablishmentController extends Controller
      * Show the profile for the given user.
      *
      * @param  int  $id
-     * @return Response
+     * @return View
      */
     public function show($id)
     {
@@ -25,7 +27,7 @@ class EstablishmentController extends Controller
 
     /**
      * Show list of establishments
-     * @return Response
+     * @return View
      */
     public function showAll() {
         $establishments = Establishment::orderBy('created_at','asc')->get();
@@ -36,7 +38,8 @@ class EstablishmentController extends Controller
 
     /**
      * Create a new establishment
-     *  @return Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function create(Request $request) {
         $validator = Validator::make($request->all(), [

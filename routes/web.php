@@ -20,4 +20,5 @@ use Illuminate\Http\Request;
 
 Route::get('/', 'EstablishmentController@showAll');
 
+Route::get('/establishment/{id}', 'EstablishmentController@show');
 Route::post('/establishment', 'EstablishmentController@create');
